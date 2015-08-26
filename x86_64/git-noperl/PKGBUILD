@@ -10,7 +10,7 @@ arch=(i686 x86_64)
 url="http://git-scm.com/"
 license=('GPL2')
 depends=('curl' 'expat>=2.0' 'openssl' 'pcre')
-makedepends=('python2' 'emacs' 'libgnome-keyring' 'xmlto' 'asciidoc')
+makedepends=('python2' 'libgnome-keyring' 'xmlto' 'asciidoc')
 optdepends=('tk: gitk and git gui'
             'python2: various helper scripts'
             'cvsps2: git cvsimport'
@@ -84,8 +84,7 @@ package() {
   # fancy git prompt
   mkdir -p "$pkgdir"/usr/share/git/
   install -m644 ./contrib/completion/git-prompt.sh "$pkgdir"/usr/share/git/git-prompt.sh
-  # emacs
-  make -C contrib/emacs prefix=/usr DESTDIR="$pkgdir" install
+
   # gnome credentials helper
   install -m755 contrib/credential/gnome-keyring/git-credential-gnome-keyring \
       "$pkgdir"/usr/lib/git-core/git-credential-gnome-keyring
