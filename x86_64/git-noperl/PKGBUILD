@@ -10,7 +10,7 @@ arch=(i686 x86_64)
 url="http://git-scm.com/"
 license=('GPL2')
 depends=('curl' 'expat>=2.0' 'openssl' 'pcre')
-makedepends=('python2' 'libgnome-keyring' 'xmlto' 'asciidoc')
+makedepends=('python2' 'libgnome-keyring')
 optdepends=('tk: gitk and git gui'
             'python2: various helper scripts'
             'cvsps2: git cvsimport'
@@ -39,10 +39,10 @@ build() {
     NO_CROSS_DIRECTORY_HARDLINKS=1 \
     NO_PERL=1 \
     MAN_BOLD_LITERAL=1 \
-    all doc
+    all
 
   make -C contrib/credential/gnome-keyring
-  make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core all doc
+  make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core all
 }
 
 check() {
@@ -73,7 +73,7 @@ package() {
     NO_CROSS_DIRECTORY_HARDLINKS=1 \
     NO_PERL=1
     MAN_BOLD_LITERAL=1 \
-    INSTALLDIRS=vendor DESTDIR="$pkgdir" install install-doc
+    INSTALLDIRS=vendor DESTDIR="$pkgdir" install
 
   # bash completion
   mkdir -p "$pkgdir"/usr/share/bash-completion/completions/
@@ -87,7 +87,7 @@ package() {
       "$pkgdir"/usr/lib/git-core/git-credential-gnome-keyring
   make -C contrib/credential/gnome-keyring clean
   # subtree installation
-  make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core DESTDIR="$pkgdir" install install-doc
+  make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core DESTDIR="$pkgdir" install
   # the rest of the contrib stuff
   cp -a ./contrib/* $pkgdir/usr/share/git/
 
